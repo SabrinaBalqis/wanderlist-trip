@@ -13,10 +13,16 @@ import { CommonModule } from '@angular/common';
 export class App implements OnInit {
   private supabaseService = inject(Supabase);
   trips: any[] = [];
+  
+  // Tab Controller Engine Link
+  currentTab: string = 'planner'; 
 
-  // 1. Automatically pull items from cloud when app mounts
   async ngOnInit() {
     await this.fetchTrips();
+  }
+
+  switchTab(tabName: string) {
+    this.currentTab = tabName;
   }
 
   async fetchTrips() {
@@ -27,7 +33,7 @@ export class App implements OnInit {
     }
   }
 
-  // 2. Capture form fields and write them to Supabase
+  // --- MODULE 1: CREATE LOGIC ENGINE ---
   async onAddTrip(event: Event) {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
@@ -43,11 +49,34 @@ export class App implements OnInit {
 
     try {
       await this.supabaseService.createTrip(newTrip);
-      form.reset(); // Clear form on success
-      await this.fetchTrips(); // Refresh the grid list layout view
+      form.reset();
+      await this.fetchTrips(); // Automatically updates the counts and UI feed items
     } catch (error) {
       console.error('❌ Error saving new trip:', error);
-      alert('Could not save your trip. Check your table parameters.');
     }
+  }
+
+  // --- BONUS LOGIC: DELETE LAYOUT SELECTION ACTION ---
+  async onDelete(id: number) {
+    if(confirm("Are you sure you want to remove this map entry? 🧸")) {
+      try {
+        // (Make sure to verify if you added the delete method into your supabase.ts file)
+        await (this.supabaseService as any).deleteTrip(id);
+        await this.fetchTrips();
+      } catch (error) {
+        console.error('❌ Error eliminating entry:', error);
+      }
+    }
+  }
+
+  // --- MODULE 2: RECTIFY MATHEMATICAL ANALYTICS SUMS ---
+  calculateTotalBudget(): number {
+    return this.trips.reduce((sum, trip) => sum + (trip.total_budget || 0), 0);
+  }
+
+  calculateAverageBudget(): number {
+    if (this.trips.length === 0) return 0;
+    const average = this.calculateTotalBudget() / this.trips.length;
+    return Math.round(average); // Returns neat integer value
   }
 }

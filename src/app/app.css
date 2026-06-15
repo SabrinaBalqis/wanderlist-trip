@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+/* 🌸 Put your gorgeous custom styling styles right here! */
+body {
+  background: linear-gradient(145deg, #fdf8f0 0%, #fff7ed 100%) !important;
+}
+
+.card-hover {
+  transition: all 0.25s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(249, 168, 212, 0.3);
+}
+
+.input-fun:focus {
+  box-shadow: 0 0 0 3px rgba(251, 146, 60, 0.2), 0 0 0 1px #fb923c;
+}
+
+.cloud-bg {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100" opacity="0.1"><path fill="%23FFB8D0" d="M40,60 Q20,40 35,25 Q45,10 65,15 Q85,5 105,20 Q125,15 135,35 Q150,30 155,50 Q165,65 150,75 L40,75 Q28,70 40,60Z"/></svg>');
+  background-repeat: repeat;
+  background-size: 80px;
+}
