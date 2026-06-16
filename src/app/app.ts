@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Supabase } from './services/supabase'; 
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class App implements OnInit {
   private supabaseService = inject(Supabase);
+  private cdr = inject(ChangeDetectorRef);
   trips: any[] = [];
   
   // Tab Controller Engine Link
@@ -27,9 +28,14 @@ export class App implements OnInit {
 
   async fetchTrips() {
     try {
-      this.trips = await this.supabaseService.getTrips() || [];
+      const data = await this.supabaseService.getTrips();
+      this.trips = data || [];
+      this.cdr.detectChanges();
+      console.log('✅ Trips loaded:', this.trips);
     } catch (error) {
       console.error('❌ Error fetching trips:', error);
+      this.trips = [];
+      this.cdr.detectChanges();
     }
   }
 
@@ -60,8 +66,7 @@ export class App implements OnInit {
   async onDelete(id: number) {
     if(confirm("Are you sure you want to remove this map entry? 🧸")) {
       try {
-        // (Make sure to verify if you added the delete method into your supabase.ts file)
-        await (this.supabaseService as any).deleteTrip(id);
+        await this.supabaseService.deleteTrip(id);
         await this.fetchTrips();
       } catch (error) {
         console.error('❌ Error eliminating entry:', error);

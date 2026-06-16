@@ -18,9 +18,14 @@ export class Supabase {
   async getTrips() {
     const { data, error } = await this.supabase
       .from('trips')
-      .select('*');
+      .select('*')
+      .order('id', { ascending: false });
     
-    if (error) throw error;
+    if (error) {
+      console.error('❌ Supabase fetch error:', error);
+      throw error;
+    }
+    console.log('✅ Supabase returned trips:', data);
     return data;
   }
 
@@ -31,7 +36,23 @@ export class Supabase {
       .insert([tripData])
       .select();
 
-    if (error) throw error;
+    if (error) {
+      console.error('❌ Supabase create error:', error);
+      throw error;
+    }
     return data;
+  }
+
+  // Delete a trip from Supabase
+  async deleteTrip(id: number) {
+    const { error } = await this.supabase
+      .from('trips')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('❌ Supabase delete error:', error);
+      throw error;
+    }
   }
 }
