@@ -76,7 +76,21 @@
 
             <div>
               <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="fas fa-image text-purple-400"></i> Cover Image (URL)</label>
-              <input type="url" name="imageUrl" placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:border-amber-300 transition-all text-sm">
+              <input type="url" name="imageUrl" #imgUrlRef
+                     placeholder="https://images.unsplash.com/..."
+                     class="w-full px-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:border-amber-300 transition-all text-sm"
+                     (input)="previewUrl = imgUrlRef.value; previewError = false">
+              <!-- Live preview -->
+              <div *ngIf="previewUrl" class="mt-2 rounded-xl overflow-hidden border-2 border-amber-100 h-28 relative bg-slate-100">
+                <img [src]="previewUrl | safeUrl" alt="preview"
+                     class="w-full h-full object-cover"
+                     [style.display]="previewError ? 'none' : 'block'"
+                     (error)="previewError = true">
+                <div *ngIf="previewError" class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-xs gap-1">
+                  <i class="fas fa-ban text-xl"></i>
+                  <span>Could not load image — check URL</span>
+                </div>
+              </div>
             </div>
 
             <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold py-3 rounded-2xl shadow-md transition-all transform active:scale-95 flex items-center justify-center gap-2 text-base mt-4">
@@ -111,9 +125,11 @@
       <i class="fas fa-trash text-xs"></i>
     </button>
 
-    <div class="h-44 w-full relative overflow-hidden">
-      <img [src]="trip.image_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500'" 
-           alt="travel destination" class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500">
+    <div class="h-44 w-full relative overflow-hidden bg-gradient-to-br from-amber-50 to-rose-50">
+      <img [src]="(trip.image_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500') | safeUrl"
+           alt="travel destination"
+           class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
+           (error)="$any($event.target).src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500'">
       <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
     </div>
 
