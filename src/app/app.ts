@@ -2,11 +2,12 @@ import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Supabase } from './services/supabase'; 
 import { CommonModule } from '@angular/common';
+import { SafeUrlPipe } from './pipes/safe-url.pipe';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, SafeUrlPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -14,9 +15,13 @@ export class App implements OnInit {
   private supabaseService = inject(Supabase);
   private cdr = inject(ChangeDetectorRef);
   trips: any[] = [];
-  
+
   // Tab Controller Engine Link
-  currentTab: string = 'planner'; 
+  currentTab: string = 'planner';
+
+  // Image URL preview state (used in template inline expressions)
+  previewUrl: string = '';
+  previewError: boolean = false;
 
   async ngOnInit() {
     await this.fetchTrips();
@@ -56,6 +61,8 @@ export class App implements OnInit {
     try {
       await this.supabaseService.createTrip(newTrip);
       form.reset();
+      this.previewUrl = '';      // clear preview after submit
+      this.previewError = false;
       await this.fetchTrips(); // Automatically updates the counts and UI feed items
     } catch (error) {
       console.error('❌ Error saving new trip:', error);
