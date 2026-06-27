@@ -35,6 +35,32 @@ export class App implements OnInit {
   previewUrl: string = '';
   previewError: boolean = false;
 
+  // --- MODULE 7: TRIP FILTER ---
+  // 'all' | 'visited' | 'dreaming'
+  tripFilter: string = 'all';
+
+  get filteredTrips(): any[] {
+    if (this.tripFilter === 'visited') return this.trips.filter(t => t.visited);
+    if (this.tripFilter === 'dreaming') return this.trips.filter(t => !t.visited);
+    return this.trips;
+  }
+
+  get visitedCount(): number { return this.trips.filter(t => t.visited).length; }
+  get dreamingCount(): number { return this.trips.filter(t => !t.visited).length; }
+
+  setTripFilter(filter: string) {
+    this.tripFilter = filter;
+  }
+
+  // Returns the number of days in a trip (inclusive), used for day input validation
+  getTripDuration(trip: any): number {
+    if (!trip.start_date || !trip.end_date) return 99;
+    const start = new Date(trip.start_date);
+    const end = new Date(trip.end_date);
+    const diff = Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    return diff > 0 ? diff + 1 : 1; // inclusive (e.g. 3-day trip = days 1, 2, 3)
+  }
+
   async ngOnInit() {
     await this.refreshAllData();
   }
@@ -148,9 +174,18 @@ export class App implements OnInit {
     if (!title || title.trim() === '') return;
 
     const cost = this.newActivityCosts[tripId] || null;
-    const dayNum = this.newActivityDays[tripId] || null;
-    const timeVal = this.newActivityTimes[tripId] || null;
     const locName = this.newActivityLocations[tripId] || null;
+    const timeVal = this.newActivityTimes[tripId] || null;
+
+    // --- Day number validation ---
+    const trip = this.trips.find(t => t.id === tripId);
+    const maxDay = trip ? this.getTripDuration(trip) : 99;
+    let dayNum = this.newActivityDays[tripId] || null;
+    if (dayNum !== null) {
+      if (dayNum < 1) dayNum = 1;
+      if (dayNum > maxDay) dayNum = maxDay;
+      this.newActivityDays[tripId] = dayNum; // reflect clamped value in UI
+    }
 
     try {
       await this.supabaseService.createActivity({
@@ -176,6 +211,7 @@ export class App implements OnInit {
   }
 
   async onDeleteActivity(activityId: number, tripId: number) {
+    if (!confirm('Remove this activity from your itinerary? 🗓️')) return;
     try {
       await this.supabaseService.deleteActivity(activityId);
       await this.fetchActivitiesForTrip(tripId);
