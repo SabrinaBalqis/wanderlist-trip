@@ -81,6 +81,21 @@ export class App implements OnInit {
     }
   }
 
+  // --- MODULE 3: TRIP STATUS TOGGLE ---
+  async onToggleTripStatus(trip: any) {
+    const newVisited = !trip.visited;
+    trip.visited = newVisited; // Optimistic update for instant UI feedback
+    this.cdr.detectChanges();
+    try {
+      await this.supabaseService.updateTripStatus(trip.id, newVisited);
+    } catch (error) {
+      // Rollback on failure
+      trip.visited = !newVisited;
+      this.cdr.detectChanges();
+      console.error('❌ Error updating trip status:', error);
+    }
+  }
+
   // --- MODULE 2: RECTIFY MATHEMATICAL ANALYTICS SUMS ---
   calculateTotalBudget(): number {
     return this.trips.reduce((sum, trip) => sum + (trip.total_budget || 0), 0);

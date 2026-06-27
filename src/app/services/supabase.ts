@@ -55,4 +55,17 @@ export class Supabase {
       throw error;
     }
   }
+
+  // Update the visited status of a trip
+  async updateTripStatus(id: number, visited: boolean) {
+    const { error } = await this.supabase
+      .from('trips')
+      .update({ visited })
+      .eq('id', id);
+
+    if (error) {
+      console.error('❌ Supabase update status error:', error);
+      throw error;
+    }
+  }
 }
