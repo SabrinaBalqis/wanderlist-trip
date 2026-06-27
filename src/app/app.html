@@ -147,21 +147,74 @@
 
       <!-- Trip Cards -->
       <div class="lg:col-span-2 space-y-5">
-        <div class="flex flex-wrap justify-between items-center border-b border-dashed border-pink-200 pb-2">
-          <h2 class="text-2xl font-bold flex items-center gap-2 bg-gradient-to-r from-slate-800 to-amber-800 bg-clip-text text-transparent">
-            <i class="fas fa-map-marked-alt text-rose-400 text-2xl"></i> My Treasure Maps
-            <span class="text-sm bg-pink-100 text-pink-600 rounded-full px-3 py-0.5 font-mono">{{trips.length}}</span>
-          </h2>
+
+        <!-- Header + filter chips -->
+        <div class="space-y-3">
+          <div class="flex flex-wrap justify-between items-center border-b border-dashed border-pink-200 pb-3">
+            <h2 class="text-2xl font-bold flex items-center gap-2 bg-gradient-to-r from-slate-800 to-amber-800 bg-clip-text text-transparent">
+              <i class="fas fa-map-marked-alt text-rose-400 text-2xl"></i> My Treasure Maps
+            </h2>
+          </div>
+
+          <!-- Filter chips + counts -->
+          <div class="flex items-center gap-2 flex-wrap">
+            <!-- Total chip -->
+            <button (click)="setTripFilter('all')"
+                    [class]="tripFilter === 'all'
+                      ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-slate-800 text-white'
+                      : 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-white border border-slate-200 text-slate-500 hover:border-slate-400'">
+              <i class="fas fa-globe-asia"></i>
+              All Trips
+              <span [class]="tripFilter === 'all' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
+                {{ trips.length }}
+              </span>
+            </button>
+
+            <!-- Visited chip -->
+            <button (click)="setTripFilter('visited')"
+                    [class]="tripFilter === 'visited'
+                      ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-emerald-500 text-white'
+                      : 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-white border border-emerald-200 text-emerald-600 hover:border-emerald-400'">
+              <i class="fas fa-check-circle"></i>
+              Visited
+              <span [class]="tripFilter === 'visited' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
+                {{ visitedCount }}
+              </span>
+            </button>
+
+            <!-- Dreaming chip -->
+            <button (click)="setTripFilter('dreaming')"
+                    [class]="tripFilter === 'dreaming'
+                      ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-violet-500 text-white'
+                      : 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-white border border-violet-200 text-violet-500 hover:border-violet-400'">
+              <i class="fas fa-cloud"></i>
+              Dreaming
+              <span [class]="tripFilter === 'dreaming' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-violet-50 text-violet-500 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
+                {{ dreamingCount }}
+              </span>
+            </button>
+          </div>
         </div>
 
+        <!-- Empty state: no trips at all -->
         <div *ngIf="trips.length === 0" class="bg-white/80 backdrop-blur-sm border-2 border-dashed border-rose-200 rounded-3xl p-12 text-center shadow-md">
           <div class="text-7xl mb-3 animate-float">🧳🌸</div>
           <p class="text-slate-600 font-semibold text-lg">No adventures yet, little wanderer!</p>
-          <p class="text-slate-400 text-sm mt-1">Fill the form on the left with your dream destination 🏝️</p>
+          <p class="text-slate-400 text-sm mt-1">Fill the form on the left with your dream destination 🏙️</p>
+        </div>
+
+        <!-- Empty state: filter returns nothing -->
+        <div *ngIf="trips.length > 0 && filteredTrips.length === 0"
+             class="bg-white/80 backdrop-blur-sm border-2 border-dashed rounded-3xl p-10 text-center shadow-md"
+             [class]="tripFilter === 'visited' ? 'border-emerald-200' : 'border-violet-200'">
+          <div class="text-5xl mb-3">{{ tripFilter === 'visited' ? '✅' : '💭' }}</div>
+          <p class="text-slate-500 font-semibold">
+            {{ tripFilter === 'visited' ? 'No visited trips yet — go explore!' : 'All trips have been visited! 🎉' }}
+          </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div *ngFor="let trip of trips"
+          <div *ngFor="let trip of filteredTrips"
                class="group relative bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-500 card-hover"
                [class]="trip.visited
                  ? 'border-2 border-emerald-300 ring-2 ring-emerald-100 shadow-emerald-100'
@@ -333,9 +386,14 @@
                   <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Add New Schedule Event</div>
 
                   <div class="grid grid-cols-3 gap-1.5">
-                    <input type="number" placeholder="Day No."
-                           [(ngModel)]="newActivityDays[trip.id]"
-                           class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
+                    <div class="flex flex-col gap-0.5">
+                      <input type="number" placeholder="Day No."
+                             [(ngModel)]="newActivityDays[trip.id]"
+                             [min]="1"
+                             [max]="getTripDuration(trip)"
+                             class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
+                      <span class="text-[9px] text-slate-400 text-center">1 – {{ getTripDuration(trip) }}</span>
+                    </div>
                     <input type="time"
                            [(ngModel)]="newActivityTimes[trip.id]"
                            class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
