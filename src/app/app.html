@@ -1,76 +1,85 @@
-<div class="min-h-screen relative cloud-bg bg-orange-50/20 antialiased overflow-x-hidden pb-12">
+<div class="min-h-screen relative bg-gradient-to-br from-amber-50/40 via-rose-50/30 to-purple-50/30 antialiased overflow-x-hidden pb-12">
   
+  <!-- Playful floating elements -->
   <div class="fixed top-20 left-5 text-3xl opacity-20 select-none pointer-events-none animate-float" style="animation-duration: 5s;">☁️</div>
-  <div class="fixed bottom-32 right-8 text-4xl opacity-20 select-none pointer-events-none animate-float" style="animation-delay: 1s; animation-duration: 6s;">☁️</div>
-  <div class="fixed top-1/3 right-12 text-2xl opacity-30 select-none pointer-events-none animate-spin-slow">✨</div>
-  <div class="fixed bottom-1/4 left-10 text-xl opacity-30 select-none pointer-events-none animate-pulse-soft">🌟</div>
+  <div class="fixed bottom-32 right-8 text-4xl opacity-20 select-none pointer-events-none animate-float" style="animation-delay: 1.5s; animation-duration: 6s;">☁️</div>
+  <div class="fixed top-1/4 right-12 text-2xl opacity-25 select-none pointer-events-none animate-spin-slow">✨</div>
+  <div class="fixed bottom-1/4 left-10 text-2xl opacity-25 select-none pointer-events-none animate-pulse-soft">🌟</div>
+  <div class="fixed top-2/3 right-8 text-3xl opacity-15 select-none pointer-events-none animate-bounce-slow" style="animation-duration: 4s;">🦋</div>
+  <div class="fixed bottom-10 left-1/3 text-2xl opacity-15 select-none pointer-events-none animate-float" style="animation-delay: 2s; animation-duration: 7s;">🌸</div>
+  <div class="fixed top-1/2 left-4 text-xl opacity-10 select-none pointer-events-none animate-float" style="animation-delay: 0.5s; animation-duration: 8s;">🌴</div>
   
-  <header class="backdrop-blur-md bg-white/70 border-b border-pink-100 sticky top-0 z-50 px-6 md:px-10 py-4 flex flex-wrap justify-between items-center shadow-sm">
+  <!-- Header -->
+  <header class="backdrop-blur-xl bg-white/60 border-b border-white/40 sticky top-0 z-50 px-6 md:px-10 py-4 flex flex-wrap justify-between items-center shadow-sm">
     <div class="flex items-center gap-5">
-      <div class="flex items-center gap-2 cursor-pointer group transition-all">
-        <div class="text-3xl transition-all group-hover:scale-110 group-hover:-rotate-6 duration-300">✈️🧳</div>
-        <h1 class="text-2xl font-bold tracking-tight bg-gradient-to-r from-amber-600 to-rose-400 bg-clip-text text-transparent">WanderList</h1>
-        <span class="text-xs bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full ml-1">✨ wander often</span>
+      <div class="flex items-center gap-3 cursor-pointer group transition-all">
+        <div class="text-3xl transition-all group-hover:scale-110 group-hover:-rotate-6 duration-500 animate-float" style="animation-duration: 3s;">✈️🧳</div>
+        <h1 class="text-2xl font-bold tracking-tight">
+          <span class="bg-gradient-to-r from-amber-500 via-rose-400 to-purple-500 bg-clip-text text-transparent">WanderList</span>
+        </h1>
+        <span class="text-xs bg-gradient-to-r from-amber-200/60 to-rose-200/60 text-amber-700/80 px-3 py-0.5 rounded-full ml-1 animate-pulse-soft font-medium">✨ wander often</span>
       </div>
     </div>
 
     <div class="flex items-center gap-4 mt-2 sm:mt-0">
-      <div class="flex items-center gap-2 bg-white/80 border border-pink-200/70 px-4 py-2 rounded-full shadow-sm backdrop-blur-sm">
-        <i class="fas fa-cloud-sun text-amber-400 text-sm"></i>
+      <div class="flex items-center gap-2 bg-white/70 backdrop-blur-md border border-amber-200/40 px-4 py-2 rounded-full shadow-lg shadow-amber-100/20 hover:shadow-amber-100/40 transition-all duration-300">
+        <i class="fas fa-cloud-sun text-amber-400 text-sm animate-spin-slow"></i>
         <span class="text-xs font-semibold text-slate-600">RM Live Sync</span>
-        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
       </div>
     </div>
   </header>
 
   <!-- Budget Analytics Bar -->
   <div class="max-w-7xl mx-auto px-4 md:px-8 mt-6">
-    <div class="bg-white/90 backdrop-blur-md border border-pink-100 rounded-3xl p-5 shadow-md grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+    <div class="bg-white/70 backdrop-blur-xl border border-white/50 rounded-3xl p-6 shadow-xl shadow-rose-100/20 hover:shadow-2xl hover:shadow-rose-100/30 transition-all duration-500 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
 
-      <div class="flex items-center gap-4 px-2 md:border-r border-dashed border-pink-100">
-        <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm transition-colors duration-300"
-             [ngClass]="isOverspending() ? 'bg-red-100 text-red-600 animate-pulse' : 'bg-amber-100 text-amber-600'">
+      <div class="flex items-center gap-4 px-3 md:border-r border-rose-200/30 group hover:scale-[1.02] transition-all duration-300">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-xl shadow-lg group-hover:shadow-xl transition-all duration-300"
+             [ngClass]="isOverspending() ? 'bg-gradient-to-br from-red-400 to-rose-500 text-white animate-pulse' : 'bg-gradient-to-br from-amber-400 via-rose-400 to-purple-400 text-white group-hover:scale-110 transition-all duration-300'">
           <i class="fas" [ngClass]="isOverspending() ? 'fa-exclamation-triangle' : 'fa-wallet'"></i>
         </div>
         <div>
           <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
             Total Travel Funds
-            <span *ngIf="isOverspending()" class="bg-red-500 text-white text-[9px] px-1.5 py-0.5 rounded font-bold tracking-normal animate-bounce">
+            <span *ngIf="isOverspending()" class="bg-gradient-to-r from-red-500 to-rose-500 text-white text-[9px] px-2 py-0.5 rounded-full font-bold tracking-normal animate-bounce">
               OVER BUDGET!
             </span>
           </p>
-          <p class="text-2xl font-black mt-0.5 transition-colors duration-300"
-             [ngClass]="isOverspending() ? 'text-red-600' : 'text-slate-800'">
+          <p class="text-3xl font-black mt-0.5 transition-all duration-300"
+             [ngClass]="isOverspending() ? 'text-red-500 animate-pulse' : 'bg-gradient-to-r from-amber-600 to-rose-500 bg-clip-text text-transparent'">
             RM{{ calculateTotalBudget() }}
           </p>
-          <div class="flex items-center gap-1 mt-1 pt-1 border-t border-dashed border-slate-100">
-            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Goal Limit: RM</span>
+          <div class="flex items-center gap-1 mt-1 pt-1 border-t border-dashed border-slate-200/50">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Goal: RM</span>
             <input type="number"
                    [ngModel]="maxWalletLimit"
                    (ngModelChange)="onUpdateWalletLimit($event)"
-                   class="w-20 bg-slate-50 border border-slate-200 focus:border-pink-300 rounded px-1 py-0.5 text-xs font-bold text-slate-600 outline-none transition-all"
-                   placeholder="Set limit...">
+                   class="w-20 bg-gradient-to-r from-amber-50 to-rose-50 border-2 border-amber-200/50 focus:border-rose-300 rounded-xl px-2 py-0.5 text-xs font-bold text-slate-600 outline-none transition-all focus:shadow-lg focus:shadow-amber-100/50">
           </div>
         </div>
       </div>
 
-      <div class="flex items-center gap-4 px-2 md:border-r border-dashed border-pink-100">
-        <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-xl shadow-sm">
+      <div class="flex items-center gap-4 px-3 md:border-r border-rose-200/30 group hover:scale-[1.02] transition-all duration-300">
+        <div class="w-14 h-14 bg-gradient-to-br from-rose-400 via-pink-400 to-purple-400 text-white rounded-2xl flex items-center justify-center text-xl shadow-lg group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
           <i class="fas fa-chart-line"></i>
         </div>
         <div>
           <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Average Per Trip</p>
-          <p class="text-2xl font-black text-slate-800 mt-0.5">RM{{ calculateAverageBudget() }}</p>
+          <p class="text-3xl font-black bg-gradient-to-r from-rose-500 to-purple-500 bg-clip-text text-transparent mt-0.5">RM{{ calculateAverageBudget() }}</p>
         </div>
       </div>
 
-      <div class="flex items-center gap-4 px-2">
-        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-xl shadow-sm">
-          <i class="fas fa-fire text-amber-500"></i>
+      <div class="flex items-center gap-4 px-3 group hover:scale-[1.02] transition-all duration-300">
+        <div class="w-14 h-14 bg-gradient-to-br from-amber-400 via-rose-400 to-purple-400 text-white rounded-2xl flex items-center justify-center text-xl shadow-lg group-hover:scale-110 group-hover:-rotate-3 transition-all duration-300">
+          <i class="fas fa-crown text-amber-200"></i>
         </div>
         <div>
           <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Peak Splurge Spot</p>
-          <p class="text-xl font-black text-rose-500 truncate max-w-[200px] mt-0.5" [title]="getMostExpensiveDestination()">
+          <p class="text-xl font-black text-rose-500 truncate max-w-[200px] mt-0.5 group-hover:text-amber-500 transition-colors duration-300" [title]="getMostExpensiveDestination()">
             {{ getMostExpensiveDestination() }}
           </p>
         </div>
@@ -84,62 +93,76 @@
 
       <!-- Add Trip Form -->
       <div class="lg:col-span-1 relative">
-        <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-pink-100 p-6 transition-all duration-300 hover:shadow-2xl overflow-hidden">
-          <div class="absolute -top-2 -right-2 bg-amber-200 text-amber-800 rounded-full w-12 h-12 flex items-center justify-center rotate-12 opacity-70 shadow-md">
-            <i class="fas fa-stamp text-lg"></i>
+        <div class="bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/50 p-6 transition-all duration-300 hover:shadow-3xl hover:scale-[1.01] relative overflow-hidden">
+          <div class="absolute -top-3 -right-3 bg-gradient-to-br from-amber-300 via-rose-300 to-purple-300 text-white rounded-full w-14 h-14 flex items-center justify-center rotate-12 opacity-90 shadow-lg animate-bounce-slow">
+            <i class="fas fa-stamp text-xl"></i>
           </div>
-          <div class="flex items-center gap-2 mb-5 border-b border-dashed border-pink-200 pb-3">
+          <div class="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-amber-100/20 to-rose-100/20 rounded-full blur-2xl"></div>
+          <div class="flex items-center gap-3 mb-5 border-b-2 border-dashed border-rose-200/50 pb-3 relative">
             <span class="text-3xl animate-bounce-slow">🧸📍</span>
-            <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-rose-500">Plan a Dream Adventure</h2>
+            <h2 class="text-xl font-bold bg-gradient-to-r from-amber-600 via-rose-500 to-purple-500 bg-clip-text text-transparent">Plan a Dream Adventure</h2>
           </div>
 
-          <form (submit)="onAddTrip($event)" class="space-y-5">
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="fas fa-map-pin text-rose-400"></i> Destination</label>
-              <input type="text" name="destination" required placeholder="ISO Bali, Indonesia"
-                     class="w-full px-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:bg-white focus:border-amber-300 transition-all text-sm font-medium outline-none input-fun">
+          <form (submit)="onAddTrip($event)" class="space-y-4 relative">
+            <div class="group">
+              <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 flex items-center gap-1 group-hover:text-rose-400 transition-colors duration-300">
+                <i class="fas fa-map-pin text-rose-400"></i> Destination
+              </label>
+              <input type="text" name="destination" required placeholder="🏝️ ISO Bali, Indonesia"
+                     class="w-full px-4 py-3 rounded-2xl border-2 border-amber-200/50 bg-gradient-to-r from-amber-50/50 to-rose-50/50 focus:bg-white focus:border-rose-300 transition-all text-sm font-medium outline-none shadow-inner group-hover:shadow-amber-100/50">
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="far fa-calendar-alt text-emerald-500"></i> Start</label>
-                <input type="date" name="startDate" required class="w-full px-3 py-2 rounded-xl border-2 border-pink-100 bg-pink-50/30 focus:border-pink-300 transition-all text-sm">
+              <div class="group">
+                <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 flex items-center gap-1 group-hover:text-emerald-500 transition-colors duration-300">
+                  <i class="far fa-calendar-alt text-emerald-400"></i> Start
+                </label>
+                <input type="date" name="startDate" required class="w-full px-3 py-2.5 rounded-xl border-2 border-rose-200/50 bg-gradient-to-r from-rose-50/30 to-pink-50/30 focus:border-rose-300 transition-all text-sm">
               </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="far fa-calendar-check text-emerald-500"></i> End</label>
-                <input type="date" name="endDate" required class="w-full px-3 py-2 rounded-xl border-2 border-pink-100 bg-pink-50/30 focus:border-pink-300 transition-all text-sm">
+              <div class="group">
+                <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 flex items-center gap-1 group-hover:text-emerald-500 transition-colors duration-300">
+                  <i class="far fa-calendar-check text-emerald-400"></i> End
+                </label>
+                <input type="date" name="endDate" required class="w-full px-3 py-2.5 rounded-xl border-2 border-rose-200/50 bg-gradient-to-r from-rose-50/30 to-pink-50/30 focus:border-rose-300 transition-all text-sm">
               </div>
             </div>
 
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="fas fa-sack-dollar text-lime-600"></i> Budget (RM)</label>
+            <div class="group">
+              <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 flex items-center gap-1 group-hover:text-amber-500 transition-colors duration-300">
+                <i class="fas fa-sack-dollar text-lime-500"></i> Budget (RM)
+              </label>
               <div class="relative">
-                <span class="absolute left-3 top-2.5 text-slate-400 text-sm">RM</span>
-                <input type="number" name="budget" required placeholder="  1200" class="w-full pl-10 pr-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:border-amber-300 transition-all text-sm">
+                <span class="absolute left-3 top-3 text-slate-400 text-sm font-bold">RM</span>
+                <input type="number" name="budget" required placeholder="  1200" class="w-full pl-10 pr-4 py-3 rounded-2xl border-2 border-amber-200/50 bg-gradient-to-r from-amber-50/50 to-rose-50/50 focus:border-rose-300 transition-all text-sm">
               </div>
             </div>
 
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="fas fa-image text-purple-400"></i> Cover Image (URL)</label>
+            <div class="group">
+              <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1.5 flex items-center gap-1 group-hover:text-purple-400 transition-colors duration-300">
+                <i class="fas fa-image text-purple-400"></i> Cover Image
+              </label>
               <input type="url" name="imageUrl" #imgUrlRef
-                     placeholder="https://images.unsplash.com/..."
-                     class="w-full px-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:border-amber-300 transition-all text-sm"
+                     placeholder="🖼️ https://images.unsplash.com/..."
+                     class="w-full px-4 py-3 rounded-2xl border-2 border-amber-200/50 bg-gradient-to-r from-amber-50/50 to-rose-50/50 focus:border-rose-300 transition-all text-sm"
                      (input)="previewUrl = imgUrlRef.value; previewError = false">
               <!-- Live preview -->
-              <div *ngIf="previewUrl" class="mt-2 rounded-xl overflow-hidden border-2 border-amber-100 h-28 relative bg-slate-100">
+              <div *ngIf="previewUrl" class="mt-3 rounded-2xl overflow-hidden border-2 border-amber-200/50 h-32 relative bg-gradient-to-r from-amber-50 to-rose-50 shadow-inner">
                 <img [src]="previewUrl | safeUrl" alt="preview"
-                     class="w-full h-full object-cover"
+                     class="w-full h-full object-cover transition-all duration-500 hover:scale-105"
                      [style.display]="previewError ? 'none' : 'block'"
                      (error)="previewError = true">
                 <div *ngIf="previewError" class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-xs gap-1">
-                  <i class="fas fa-ban text-xl"></i>
+                  <i class="fas fa-ban text-2xl"></i>
                   <span>Could not load image — check URL</span>
                 </div>
               </div>
             </div>
 
-            <button type="submit" class="w-full bg-gradient-to-r from-amber-500 to-rose-500 text-white font-bold py-3 rounded-2xl shadow-md transition-all transform active:scale-95 flex items-center justify-center gap-2 text-base mt-4">
-              <i class="fas fa-paper-plane"></i> Add to Wishlist ✨
+            <button type="submit" class="w-full bg-gradient-to-r from-amber-400 via-rose-400 to-purple-400 hover:from-amber-500 hover:via-rose-500 hover:to-purple-500 text-white font-bold py-3.5 rounded-2xl shadow-lg transition-all transform hover:scale-105 hover:shadow-2xl active:scale-95 flex items-center justify-center gap-2 text-base relative overflow-hidden group">
+              <span class="absolute inset-0 bg-gradient-to-r from-amber-400 via-rose-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span class="relative flex items-center gap-2">
+                <i class="fas fa-paper-plane group-hover:animate-bounce"></i> Add to Wishlist ✨
+              </span>
             </button>
           </form>
         </div>
@@ -150,64 +173,60 @@
 
         <!-- Header + filter chips -->
         <div class="space-y-3">
-          <div class="flex flex-wrap justify-between items-center border-b border-dashed border-pink-200 pb-3">
-            <h2 class="text-2xl font-bold flex items-center gap-2 bg-gradient-to-r from-slate-800 to-amber-800 bg-clip-text text-transparent">
+          <div class="flex flex-wrap justify-between items-center border-b-2 border-dashed border-rose-200/50 pb-3">
+            <h2 class="text-2xl font-bold flex items-center gap-2 bg-gradient-to-r from-amber-600 via-rose-500 to-purple-500 bg-clip-text text-transparent animate-gradient">
               <i class="fas fa-map-marked-alt text-rose-400 text-2xl"></i> My Treasure Maps
             </h2>
           </div>
 
-          <!-- Filter chips + counts -->
+          <!-- Filter chips -->
           <div class="flex items-center gap-2 flex-wrap">
-            <!-- Total chip -->
             <button (click)="setTripFilter('all')"
                     [class]="tripFilter === 'all'
-                      ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-slate-800 text-white'
-                      : 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-white border border-slate-200 text-slate-500 hover:border-slate-400'">
+                      ? 'flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold shadow-lg transition-all duration-300 bg-gradient-to-r from-amber-500 to-rose-500 text-white hover:scale-105'
+                      : 'flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold shadow-sm transition-all duration-300 bg-white/60 backdrop-blur-sm border-2 border-amber-200/50 text-slate-600 hover:border-rose-300 hover:scale-105 hover:shadow-md'">
               <i class="fas fa-globe-asia"></i>
               All Trips
-              <span [class]="tripFilter === 'all' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
+              <span [class]="tripFilter === 'all' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-amber-100/50 text-slate-600 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
                 {{ trips.length }}
               </span>
             </button>
 
-            <!-- Visited chip -->
             <button (click)="setTripFilter('visited')"
                     [class]="tripFilter === 'visited'
-                      ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-emerald-500 text-white'
-                      : 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-white border border-emerald-200 text-emerald-600 hover:border-emerald-400'">
+                      ? 'flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold shadow-lg transition-all duration-300 bg-gradient-to-r from-emerald-400 to-teal-500 text-white hover:scale-105'
+                      : 'flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold shadow-sm transition-all duration-300 bg-white/60 backdrop-blur-sm border-2 border-emerald-200/50 text-emerald-600 hover:border-emerald-300 hover:scale-105 hover:shadow-md'">
               <i class="fas fa-check-circle"></i>
               Visited
-              <span [class]="tripFilter === 'visited' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-emerald-50 text-emerald-600 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
+              <span [class]="tripFilter === 'visited' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-emerald-100/50 text-emerald-600 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
                 {{ visitedCount }}
               </span>
             </button>
 
-            <!-- Dreaming chip -->
             <button (click)="setTripFilter('dreaming')"
                     [class]="tripFilter === 'dreaming'
-                      ? 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-violet-500 text-white'
-                      : 'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold shadow-sm transition-all bg-white border border-violet-200 text-violet-500 hover:border-violet-400'">
+                      ? 'flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold shadow-lg transition-all duration-300 bg-gradient-to-r from-violet-400 to-purple-500 text-white hover:scale-105'
+                      : 'flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-bold shadow-sm transition-all duration-300 bg-white/60 backdrop-blur-sm border-2 border-violet-200/50 text-violet-500 hover:border-violet-300 hover:scale-105 hover:shadow-md'">
               <i class="fas fa-cloud"></i>
               Dreaming
-              <span [class]="tripFilter === 'dreaming' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-violet-50 text-violet-500 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
+              <span [class]="tripFilter === 'dreaming' ? 'bg-white/20 text-white px-1.5 py-0.5 rounded-full font-mono text-[10px]' : 'bg-violet-100/50 text-violet-500 px-1.5 py-0.5 rounded-full font-mono text-[10px]'">
                 {{ dreamingCount }}
               </span>
             </button>
           </div>
         </div>
 
-        <!-- Empty state: no trips at all -->
-        <div *ngIf="trips.length === 0" class="bg-white/80 backdrop-blur-sm border-2 border-dashed border-rose-200 rounded-3xl p-12 text-center shadow-md">
+        <!-- Empty states -->
+        <div *ngIf="trips.length === 0" class="bg-white/60 backdrop-blur-xl border-2 border-dashed border-rose-200/50 rounded-3xl p-12 text-center shadow-xl hover:shadow-2xl transition-all duration-500">
           <div class="text-7xl mb-3 animate-float">🧳🌸</div>
           <p class="text-slate-600 font-semibold text-lg">No adventures yet, little wanderer!</p>
           <p class="text-slate-400 text-sm mt-1">Fill the form on the left with your dream destination 🏙️</p>
         </div>
 
-        <!-- Empty state: filter returns nothing -->
         <div *ngIf="trips.length > 0 && filteredTrips.length === 0"
-             class="bg-white/80 backdrop-blur-sm border-2 border-dashed rounded-3xl p-10 text-center shadow-md"
-             [class]="tripFilter === 'visited' ? 'border-emerald-200' : 'border-violet-200'">
-          <div class="text-5xl mb-3">{{ tripFilter === 'visited' ? '✅' : '💭' }}</div>
+             class="bg-white/60 backdrop-blur-xl border-2 border-dashed rounded-3xl p-10 text-center shadow-xl"
+             [class]="tripFilter === 'visited' ? 'border-emerald-200/50' : 'border-violet-200/50'">
+          <div class="text-5xl mb-3 animate-bounce-slow">{{ tripFilter === 'visited' ? '✅' : '💭' }}</div>
           <p class="text-slate-500 font-semibold">
             {{ tripFilter === 'visited' ? 'No visited trips yet — go explore!' : 'All trips have been visited! 🎉' }}
           </p>
@@ -215,16 +234,16 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div *ngFor="let trip of filteredTrips"
-               class="group relative bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-500 card-hover"
+               class="group relative bg-white/70 backdrop-blur-xl rounded-2xl overflow-hidden shadow-xl transition-all duration-500 card-hover"
                [class]="trip.visited
-                 ? 'border-2 border-emerald-300 ring-2 ring-emerald-100 shadow-emerald-100'
-                 : 'border border-pink-100'">
+                 ? 'border-2 border-emerald-300/50 ring-2 ring-emerald-100/50 shadow-emerald-100/30'
+                 : 'border-2 border-rose-100/50'">
 
-            <!-- Dreaming / Visited toggle pill -->
+            <!-- Status toggle -->
             <button (click)="onToggleTripStatus(trip)"
                     [class]="trip.visited
-                      ? 'absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold shadow-md transition-all duration-300 bg-emerald-500 text-white'
-                      : 'absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold shadow-md transition-all duration-300 bg-violet-400 text-white'"
+                      ? 'absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold shadow-lg transition-all duration-300 bg-gradient-to-r from-emerald-400 to-teal-500 text-white hover:scale-105'
+                      : 'absolute top-3 left-3 z-10 flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[11px] font-bold shadow-lg transition-all duration-300 bg-gradient-to-r from-violet-400 to-purple-500 text-white hover:scale-105'"
                     title="Toggle visited status">
               <span class="relative inline-flex items-center w-7 h-4 rounded-full transition-colors duration-300"
                     [class]="trip.visited ? 'bg-emerald-300' : 'bg-violet-300'">
@@ -235,22 +254,22 @@
               <span *ngIf="trip.visited">Visited ✅</span>
             </button>
 
-            <button (click)="onDelete(trip.id)" class="absolute top-3 right-3 z-10 bg-white/90 hover:bg-red-500 hover:text-white text-slate-500 transition-colors rounded-full w-7 h-7 flex items-center justify-center shadow-sm">
+            <button (click)="onDelete(trip.id)" class="absolute top-3 right-3 z-10 bg-white/80 backdrop-blur-sm hover:bg-gradient-to-r hover:from-red-500 hover:to-rose-500 hover:text-white text-slate-500 transition-all rounded-full w-8 h-8 flex items-center justify-center shadow-lg hover:scale-110">
               <i class="fas fa-trash text-xs"></i>
             </button>
 
-            <!-- Cover image with visited styling -->
-            <div class="h-44 w-full relative overflow-hidden bg-gradient-to-br from-amber-50 to-rose-50">
+            <!-- Cover image -->
+            <div class="h-48 w-full relative overflow-hidden bg-gradient-to-br from-amber-50 to-rose-50">
               <img [src]="(trip.image_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500') | safeUrl"
                    alt="travel destination"
-                   [class]="trip.visited ? 'w-full h-full object-cover transition-transform group-hover:scale-105 duration-500 brightness-75 saturate-50' : 'w-full h-full object-cover transition-transform group-hover:scale-105 duration-500'"
+                   [class]="trip.visited ? 'w-full h-full object-cover transition-transform group-hover:scale-110 duration-700 brightness-75 saturate-50' : 'w-full h-full object-cover transition-transform group-hover:scale-110 duration-700'"
                    (error)="$any($event.target).src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500'">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
 
-              <!-- Passport stamp overlay (only when visited) -->
+              <!-- Passport stamp -->
               <div *ngIf="trip.visited"
                    class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <div class="rotate-[-15deg] border-4 border-emerald-400 rounded-xl px-4 py-2 bg-emerald-500/20 backdrop-blur-[2px] shadow-lg">
+                <div class="rotate-[-15deg] border-4 border-emerald-400/70 rounded-xl px-4 py-2 bg-emerald-500/20 backdrop-blur-sm shadow-2xl animate-pulse-soft">
                   <div class="text-emerald-300 font-black text-lg tracking-widest uppercase leading-tight text-center drop-shadow">
                     <div class="text-2xl">✈️</div>
                     <div class="text-xs">BEEN HERE</div>
@@ -264,94 +283,87 @@
             <div class="p-5 relative">
               <div class="flex items-start justify-between">
                 <div>
-                  <h3 [class]="trip.visited ? 'text-xl font-bold text-slate-400 flex items-center gap-1' : 'text-xl font-bold text-slate-800 flex items-center gap-1'">
-                    <i [class]="trip.visited ? 'fas fa-location-dot text-emerald-400 text-sm' : 'fas fa-location-dot text-rose-400 text-sm'"></i>
+                  <h3 [class]="trip.visited ? 'text-xl font-bold text-slate-400 flex items-center gap-1' : 'text-xl font-bold text-slate-800 flex items-center gap-1 group-hover:text-rose-500 transition-colors duration-300'">
+                    <i [class]="trip.visited ? 'fas fa-location-dot text-emerald-400 text-sm' : 'fas fa-location-dot text-rose-400 text-sm group-hover:text-rose-500 transition-colors duration-300'"></i>
                     {{ trip.destination }}
                   </h3>
                   <div [class]="trip.visited
-                    ? 'flex items-center gap-1 text-xs text-slate-400 mt-1 bg-slate-100 inline-flex px-2 py-0.5 rounded-full'
-                    : 'flex items-center gap-1 text-xs text-slate-500 mt-1 bg-slate-100 inline-flex px-2 py-0.5 rounded-full'">
+                    ? 'flex items-center gap-1 text-xs text-slate-400 mt-1 bg-slate-100/50 inline-flex px-2 py-0.5 rounded-full'
+                    : 'flex items-center gap-1 text-xs text-slate-500 mt-1 bg-slate-100/50 inline-flex px-2 py-0.5 rounded-full group-hover:bg-rose-50 transition-colors duration-300'">
                     <i class="far fa-calendar-alt"></i> {{ trip.start_date | date:'MMM d' }} – {{ trip.end_date | date:'MMM d, y' }}
                   </div>
                 </div>
-                <div [class]="trip.visited ? 'bg-gradient-to-br from-emerald-50 to-teal-50 rounded-full p-2 shadow-inner' : 'bg-gradient-to-br from-amber-50 to-rose-50 rounded-full p-2 shadow-inner'">
-                  <i [class]="trip.visited ? 'fas fa-passport text-emerald-400 text-base' : 'fas fa-passport text-rose-400 text-base'"></i>
+                <div [class]="trip.visited ? 'bg-gradient-to-br from-emerald-100 to-teal-100 rounded-full p-2 shadow-inner' : 'bg-gradient-to-br from-amber-100 to-rose-100 rounded-full p-2 shadow-inner group-hover:scale-110 transition-all duration-300'">
+                  <i [class]="trip.visited ? 'fas fa-passport text-emerald-500 text-base' : 'fas fa-passport text-rose-400 text-base'"></i>
                 </div>
               </div>
 
-              <!-- Budget row -->
-              <div class="mt-4 flex items-center justify-between border-t border-pink-50 pt-3">
+              <!-- Budget -->
+              <div class="mt-4 flex items-center justify-between border-t border-rose-100/50 pt-3">
                 <div class="flex items-center gap-1 text-sm">
                   <span class="text-slate-500 text-xs font-semibold">💰 estimated</span>
-                  <span class="text-lg font-bold text-emerald-600">RM{{ trip.total_budget }}</span>
+                  <span class="text-lg font-bold bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent">RM{{ trip.total_budget }}</span>
                 </div>
                 <span [class]="trip.visited
-                  ? 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200'
-                  : 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 text-violet-500 border border-violet-200'">
+                  ? 'text-[10px] font-bold px-3 py-1 rounded-full bg-gradient-to-r from-emerald-100 to-teal-100 text-emerald-600 border border-emerald-200/50'
+                  : 'text-[10px] font-bold px-3 py-1 rounded-full bg-gradient-to-r from-violet-100 to-purple-100 text-violet-500 border border-violet-200/50 group-hover:scale-105 transition-all duration-300'">
                   {{ trip.visited ? '✅ Visited' : '💭 Dreaming' }}
                 </span>
               </div>
 
-              <!-- Per-trip budget progress bar -->
+              <!-- Progress bar -->
               <div class="mt-3">
                 <div class="flex justify-between text-[11px] font-bold mb-1">
-                  <span [ngClass]="isIndividualTripOverspent(trip) ? 'text-red-600' : 'text-slate-500'">
+                  <span [ngClass]="isIndividualTripOverspent(trip) ? 'text-red-500' : 'text-slate-500'">
                     Actual Spent: RM{{ getActualSpentForTrip(trip.id) }}
                   </span>
-                  <span [ngClass]="isIndividualTripOverspent(trip) ? 'text-red-600 font-black animate-pulse' : 'text-emerald-600'">
+                  <span [ngClass]="isIndividualTripOverspent(trip) ? 'text-red-500 font-black animate-pulse' : 'bg-gradient-to-r from-emerald-500 to-teal-500 bg-clip-text text-transparent'">
                     {{ isIndividualTripOverspent(trip) ? '⚠️ OVER LIMIT!' : getBudgetPercentage(trip) + '% used' }}
                   </span>
                 </div>
-                <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200/50">
-                  <div class="h-full rounded-full transition-all duration-500"
-                       [ngClass]="isIndividualTripOverspent(trip) ? 'bg-gradient-to-r from-red-500 to-rose-600' : (getBudgetPercentage(trip) >= 75 ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 'bg-gradient-to-r from-emerald-400 to-teal-500')"
+                <div class="w-full bg-slate-100/50 rounded-full h-2.5 overflow-hidden border border-slate-200/50 shadow-inner">
+                  <div class="h-full rounded-full transition-all duration-1000"
+                       [ngClass]="isIndividualTripOverspent(trip) ? 'bg-gradient-to-r from-red-400 to-rose-500' : (getBudgetPercentage(trip) >= 75 ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 'bg-gradient-to-r from-emerald-400 to-teal-500')"
                        [style.width.%]="getBudgetPercentage(trip) > 100 ? 100 : getBudgetPercentage(trip)">
                   </div>
                 </div>
               </div>
 
-              <!-- Activities section -->
-              <div class="mt-4 pt-3 border-t border-dashed border-slate-100 transition-colors duration-300 -mx-5 -mb-5 p-4 rounded-b-2xl"
-                   [ngClass]="isIndividualTripOverspent(trip) ? 'bg-red-50/50' : 'bg-slate-50/50'">
+              <!-- Activities -->
+              <div class="mt-4 pt-3 border-t-2 border-dashed border-slate-100/50 transition-colors duration-300 -mx-5 -mb-5 p-4 rounded-b-2xl"
+                   [ngClass]="isIndividualTripOverspent(trip) ? 'bg-gradient-to-br from-red-50/50 to-rose-50/50' : 'bg-gradient-to-br from-slate-50/50 to-amber-50/30'">
 
                 <div class="text-xs font-bold uppercase tracking-wide mb-2 flex items-center justify-between">
                   <span class="flex items-center gap-1 text-slate-500">
                     <i class="fas fa-map-signs text-rose-400"></i> Travel Tentative Schedule
                   </span>
                   <div class="flex items-center gap-1">
-                    <span class="bg-rose-100 text-rose-500 rounded-full px-2 py-0.5 font-mono text-[10px]">
+                    <span class="bg-gradient-to-r from-rose-100 to-pink-100 text-rose-500 rounded-full px-2 py-0.5 font-mono text-[10px]">
                       {{ getActivitiesForTrip(trip.id).length }} stops
                     </span>
-                    <span *ngIf="isIndividualTripOverspent(trip)" class="text-[9px] bg-red-600 text-white font-extrabold px-1.5 rounded shadow-sm">
+                    <span *ngIf="isIndividualTripOverspent(trip)" class="text-[9px] bg-gradient-to-r from-red-500 to-rose-500 text-white font-extrabold px-2 rounded-full shadow-lg animate-bounce">
                       RM{{ getActualSpentForTrip(trip.id) - trip.total_budget }} OVER!
                     </span>
                   </div>
                 </div>
 
-                <!-- Empty state -->
-                <p *ngIf="getActivitiesForTrip(trip.id).length === 0" class="text-[11px] text-slate-400 italic mb-3 pl-1">
-                  Schedule is completely clear. Build your timeline below! 👇
-                </p>
-
                 <!-- Activity list -->
                 <div class="space-y-2 mb-4 max-h-56 overflow-y-auto pr-1">
                   <div *ngFor="let act of getActivitiesForTrip(trip.id)"
                        [class]="act.done
-                         ? 'bg-slate-50 rounded-xl p-2.5 border border-slate-100 shadow-sm transition-all group/item opacity-60'
-                         : 'bg-white rounded-xl p-2.5 border border-slate-100 shadow-sm hover:border-pink-200 transition-all group/item'">
+                         ? 'bg-slate-50/50 rounded-xl p-2.5 border border-slate-100/50 shadow-sm transition-all group/item opacity-60'
+                         : 'bg-white/80 backdrop-blur-sm rounded-xl p-2.5 border border-slate-100/50 shadow-sm hover:shadow-lg hover:border-rose-200/50 transition-all group/item hover:scale-[1.02]'">
                     <div class="flex items-start gap-2">
-                      <!-- Checkbox -->
                       <input type="checkbox"
                              [checked]="act.done"
                              (change)="onToggleActivity(act)"
-                             class="accent-rose-400 rounded flex-shrink-0 mt-0.5 cursor-pointer">
-                      <!-- Content -->
+                             class="accent-rose-400 rounded flex-shrink-0 mt-0.5 cursor-pointer w-4 h-4 hover:scale-110 transition-all duration-300">
                       <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-1.5 flex-wrap">
-                          <span *ngIf="act.day_number" class="bg-amber-100 text-amber-800 text-[9px] px-1.5 py-0.5 rounded-md font-bold">
+                          <span *ngIf="act.day_number" class="bg-gradient-to-r from-amber-200 to-rose-200 text-amber-800 text-[9px] px-2 py-0.5 rounded-md font-bold">
                             DAY {{ act.day_number }}
                           </span>
-                          <span [class]="act.done ? 'text-xs font-bold text-slate-400 line-through' : 'text-xs font-bold text-slate-800'">
+                          <span [class]="act.done ? 'text-xs font-bold text-slate-400 line-through' : 'text-xs font-bold text-slate-700'">
                             ✨ {{ act.title }}
                           </span>
                         </div>
@@ -365,15 +377,14 @@
                           </span>
                         </div>
                       </div>
-                      <!-- Cost + delete -->
                       <div class="flex items-center gap-1 flex-shrink-0">
                         <span [class]="act.done
-                          ? 'font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-lg text-[10px] whitespace-nowrap line-through'
-                          : 'font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg text-[10px] whitespace-nowrap'">
+                          ? 'font-bold text-slate-400 bg-slate-100/50 px-2 py-0.5 rounded-lg text-[10px] whitespace-nowrap line-through'
+                          : 'font-bold text-slate-600 bg-slate-100/50 px-2 py-0.5 rounded-lg text-[10px] whitespace-nowrap'">
                           RM{{ act.cost || 0 }}
                         </span>
                         <button (click)="onDeleteActivity(act.id, trip.id)"
-                                class="opacity-0 group-hover/item:opacity-100 transition-opacity text-slate-300 hover:text-red-400">
+                                class="opacity-0 group-hover/item:opacity-100 transition-opacity text-slate-300 hover:text-red-400 hover:scale-110">
                           <i class="fas fa-xmark text-[10px]"></i>
                         </button>
                       </div>
@@ -381,8 +392,8 @@
                   </div>
                 </div>
 
-                <!-- Add activity form -->
-                <div class="bg-white/70 p-2.5 rounded-xl border border-slate-200/60 space-y-2">
+                <!-- Add activity -->
+                <div class="bg-white/60 backdrop-blur-sm p-3 rounded-xl border-2 border-slate-200/50 space-y-2 shadow-inner hover:shadow-lg transition-all duration-300">
                   <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Add New Schedule Event</div>
 
                   <div class="grid grid-cols-3 gap-1.5">
@@ -391,28 +402,28 @@
                              [(ngModel)]="newActivityDays[trip.id]"
                              [min]="1"
                              [max]="getTripDuration(trip)"
-                             class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
+                             class="text-[11px] px-2 py-1.5 rounded-lg border-2 border-slate-200/50 outline-none focus:border-rose-300 focus:shadow-lg focus:shadow-rose-100 text-center bg-white">
                       <span class="text-[9px] text-slate-400 text-center">1 – {{ getTripDuration(trip) }}</span>
                     </div>
                     <input type="time"
                            [(ngModel)]="newActivityTimes[trip.id]"
-                           class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
+                           class="text-[11px] px-2 py-1.5 rounded-lg border-2 border-slate-200/50 outline-none focus:border-rose-300 focus:shadow-lg focus:shadow-rose-100 text-center bg-white">
                     <input type="number" placeholder="Cost RM"
                            [(ngModel)]="newActivityCosts[trip.id]"
-                           class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
+                           class="text-[11px] px-2 py-1.5 rounded-lg border-2 border-slate-200/50 outline-none focus:border-rose-300 focus:shadow-lg focus:shadow-rose-100 text-center bg-white">
                   </div>
 
                   <div class="flex gap-1.5">
                     <div class="w-11/12 space-y-1.5">
                       <input type="text" placeholder="Activity Title (e.g. Cafe Hunting)"
                              [(ngModel)]="newActivityTitles[trip.id]"
-                             class="w-full text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 bg-white">
+                             class="w-full text-[11px] px-2 py-1.5 rounded-lg border-2 border-slate-200/50 outline-none focus:border-rose-300 focus:shadow-lg focus:shadow-rose-100 bg-white">
                       <input type="text" placeholder="Location Name (e.g. Concubine Lane)"
                              [(ngModel)]="newActivityLocations[trip.id]"
-                             class="w-full text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 bg-white">
+                             class="w-full text-[11px] px-2 py-1.5 rounded-lg border-2 border-slate-200/50 outline-none focus:border-rose-300 focus:shadow-lg focus:shadow-rose-100 bg-white">
                     </div>
                     <button (click)="onAddActivity(trip.id)"
-                            class="w-1/12 bg-rose-400 hover:bg-rose-500 text-white rounded-lg transition-colors flex items-center justify-center self-stretch shadow-sm">
+                            class="w-1/12 bg-gradient-to-r from-rose-400 to-pink-500 hover:from-rose-500 hover:to-pink-600 text-white rounded-lg transition-all flex items-center justify-center self-stretch shadow-lg hover:shadow-xl transform hover:scale-105 active:scale-95">
                       <i class="fas fa-plus text-sm"></i>
                     </button>
                   </div>
@@ -426,7 +437,10 @@
     </main>
   </div>
 
-  <footer class="mt-12 border-t border-pink-100/60 py-6 text-center text-slate-400 text-sm flex flex-wrap justify-center gap-4 items-center bg-white/40 backdrop-blur-sm">
+  <footer class="mt-12 border-t-2 border-rose-200/30 py-6 text-center text-slate-400 text-sm flex flex-wrap justify-center gap-4 items-center bg-white/30 backdrop-blur-sm">
     <span>🧸 © 2026 WanderList — where wanderlust meets cuteness</span>
+    <span class="text-rose-300 animate-pulse-soft">🌸</span>
+    <span class="text-amber-300 animate-bounce-slow">✈️</span>
+    <span class="text-purple-300 animate-spin-slow inline-block">🌟</span>
   </footer>
 </div>
