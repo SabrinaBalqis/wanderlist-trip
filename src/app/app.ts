@@ -184,6 +184,12 @@ export class App implements OnInit {
     }
   }
 
+  // Toggle done state locally (no done column in DB — UI state only)
+  onToggleActivity(activity: any) {
+    activity.done = !activity.done;
+    this.cdr.detectChanges();
+  }
+
   // --- MODULE 5: BUDGET ANALYTICS ---
 
   calculateTotalBudget(): number {
