@@ -23,10 +23,11 @@
     </div>
   </header>
 
+  <!-- Budget Analytics Bar -->
   <div class="max-w-7xl mx-auto px-4 md:px-8 mt-6">
     <div class="bg-white/90 backdrop-blur-md border border-pink-100 rounded-3xl p-5 shadow-md grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-      
-      <div class="flex items-center gap-4 px-2 md:border-r border-dashed border-pink-100 last:border-0">
+
+      <div class="flex items-center gap-4 px-2 md:border-r border-dashed border-pink-100">
         <div class="w-12 h-12 rounded-2xl flex items-center justify-center text-xl shadow-sm transition-colors duration-300"
              [ngClass]="isOverspending() ? 'bg-red-100 text-red-600 animate-pulse' : 'bg-amber-100 text-amber-600'">
           <i class="fas" [ngClass]="isOverspending() ? 'fa-exclamation-triangle' : 'fa-wallet'"></i>
@@ -43,17 +44,17 @@
             RM{{ calculateTotalBudget() }}
           </p>
           <div class="flex items-center gap-1 mt-1 pt-1 border-t border-dashed border-slate-100">
-      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Goal Limit: RM</span>
-      <input type="number" 
-             [ngModel]="maxWalletLimit" 
-             (ngModelChange)="onUpdateWalletLimit($event)"
-             class="w-20 bg-slate-50 border border-slate-200 focus:border-pink-300 rounded px-1 py-0.5 text-xs font-bold text-slate-600 outline-none transition-all"
-             placeholder="Set limit...">
-    </div>
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Goal Limit: RM</span>
+            <input type="number"
+                   [ngModel]="maxWalletLimit"
+                   (ngModelChange)="onUpdateWalletLimit($event)"
+                   class="w-20 bg-slate-50 border border-slate-200 focus:border-pink-300 rounded px-1 py-0.5 text-xs font-bold text-slate-600 outline-none transition-all"
+                   placeholder="Set limit...">
+          </div>
         </div>
       </div>
 
-      <div class="flex items-center gap-4 px-2 md:border-r border-dashed border-pink-100 last:border-0">
+      <div class="flex items-center gap-4 px-2 md:border-r border-dashed border-pink-100">
         <div class="w-12 h-12 bg-rose-100 text-rose-600 rounded-2xl flex items-center justify-center text-xl shadow-sm">
           <i class="fas fa-chart-line"></i>
         </div>
@@ -63,7 +64,7 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-4 px-2 last:border-0">
+      <div class="flex items-center gap-4 px-2">
         <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-xl shadow-sm">
           <i class="fas fa-fire text-amber-500"></i>
         </div>
@@ -80,7 +81,8 @@
 
   <div class="max-w-7xl mx-auto px-4 md:px-8 py-6">
     <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      
+
+      <!-- Add Trip Form -->
       <div class="lg:col-span-1 relative">
         <div class="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl border border-pink-100 p-6 transition-all duration-300 hover:shadow-2xl overflow-hidden">
           <div class="absolute -top-2 -right-2 bg-amber-200 text-amber-800 rounded-full w-12 h-12 flex items-center justify-center rotate-12 opacity-70 shadow-md">
@@ -90,11 +92,11 @@
             <span class="text-3xl animate-bounce-slow">🧸📍</span>
             <h2 class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-rose-500">Plan a Dream Adventure</h2>
           </div>
-          
+
           <form (submit)="onAddTrip($event)" class="space-y-5">
             <div>
               <label class="block text-xs font-bold uppercase tracking-wide text-slate-500 mb-1 flex items-center gap-1"><i class="fas fa-map-pin text-rose-400"></i> Destination</label>
-              <input type="text" name="destination" required placeholder="ISO Bali, Indonesia" 
+              <input type="text" name="destination" required placeholder="ISO Bali, Indonesia"
                      class="w-full px-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:bg-white focus:border-amber-300 transition-all text-sm font-medium outline-none input-fun">
             </div>
 
@@ -123,7 +125,7 @@
                      placeholder="https://images.unsplash.com/..."
                      class="w-full px-4 py-2.5 rounded-2xl border-2 border-amber-100 bg-amber-50/40 focus:border-amber-300 transition-all text-sm"
                      (input)="previewUrl = imgUrlRef.value; previewError = false">
-              
+              <!-- Live preview -->
               <div *ngIf="previewUrl" class="mt-2 rounded-xl overflow-hidden border-2 border-amber-100 h-28 relative bg-slate-100">
                 <img [src]="previewUrl | safeUrl" alt="preview"
                      class="w-full h-full object-cover"
@@ -143,10 +145,11 @@
         </div>
       </div>
 
+      <!-- Trip Cards -->
       <div class="lg:col-span-2 space-y-5">
         <div class="flex flex-wrap justify-between items-center border-b border-dashed border-pink-200 pb-2">
           <h2 class="text-2xl font-bold flex items-center gap-2 bg-gradient-to-r from-slate-800 to-amber-800 bg-clip-text text-transparent">
-            <i class="fas fa-map-marked-alt text-rose-400 text-2xl"></i> My Treasure Maps 
+            <i class="fas fa-map-marked-alt text-rose-400 text-2xl"></i> My Treasure Maps
             <span class="text-sm bg-pink-100 text-pink-600 rounded-full px-3 py-0.5 font-mono">{{trips.length}}</span>
           </h2>
         </div>
@@ -158,44 +161,85 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div *ngFor="let trip of trips" class="group relative bg-white rounded-2xl overflow-hidden shadow-lg border border-pink-100 transition-all duration-300 card-hover">
-            
-            <div class="absolute top-3 left-3 z-10 bg-rose-400 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-md flex items-center gap-1 cursor-pointer hover:bg-rose-500 transition-colors">
-              <i class="fas fa-heart"></i> {{ trip.status || 'Dreaming 💭' }}
-            </div>
-            
+          <div *ngFor="let trip of trips"
+               class="group relative bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-500 card-hover"
+               [class]="trip.visited
+                 ? 'border-2 border-emerald-300 ring-2 ring-emerald-100 shadow-emerald-100'
+                 : 'border border-pink-100'">
+
+            <!-- Dreaming / Visited toggle pill -->
+            <button (click)="onToggleTripStatus(trip)"
+                    [class]="trip.visited
+                      ? 'absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold shadow-md transition-all duration-300 bg-emerald-500 text-white'
+                      : 'absolute top-3 left-3 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold shadow-md transition-all duration-300 bg-violet-400 text-white'"
+                    title="Toggle visited status">
+              <span class="relative inline-flex items-center w-7 h-4 rounded-full transition-colors duration-300"
+                    [class]="trip.visited ? 'bg-emerald-300' : 'bg-violet-300'">
+                <span class="absolute left-0.5 w-3 h-3 bg-white rounded-full shadow transition-transform duration-300"
+                      [class]="trip.visited ? 'translate-x-3' : 'translate-x-0'"></span>
+              </span>
+              <span *ngIf="!trip.visited">Dreaming 💭</span>
+              <span *ngIf="trip.visited">Visited ✅</span>
+            </button>
+
             <button (click)="onDelete(trip.id)" class="absolute top-3 right-3 z-10 bg-white/90 hover:bg-red-500 hover:text-white text-slate-500 transition-colors rounded-full w-7 h-7 flex items-center justify-center shadow-sm">
               <i class="fas fa-trash text-xs"></i>
             </button>
 
+            <!-- Cover image with visited styling -->
             <div class="h-44 w-full relative overflow-hidden bg-gradient-to-br from-amber-50 to-rose-50">
               <img [src]="(trip.image_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500') | safeUrl"
                    alt="travel destination"
-                   class="w-full h-full object-cover transition-transform group-hover:scale-105 duration-500"
+                   [class]="trip.visited ? 'w-full h-full object-cover transition-transform group-hover:scale-105 duration-500 brightness-75 saturate-50' : 'w-full h-full object-cover transition-transform group-hover:scale-105 duration-500'"
                    (error)="$any($event.target).src = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500'">
               <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+
+              <!-- Passport stamp overlay (only when visited) -->
+              <div *ngIf="trip.visited"
+                   class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                <div class="rotate-[-15deg] border-4 border-emerald-400 rounded-xl px-4 py-2 bg-emerald-500/20 backdrop-blur-[2px] shadow-lg">
+                  <div class="text-emerald-300 font-black text-lg tracking-widest uppercase leading-tight text-center drop-shadow">
+                    <div class="text-2xl">✈️</div>
+                    <div class="text-xs">BEEN HERE</div>
+                    <div class="text-[10px] opacity-80">{{ trip.end_date | date:'MMM yyyy' }}</div>
+                  </div>
+                </div>
+              </div>
             </div>
 
+            <!-- Card content -->
             <div class="p-5 relative">
               <div class="flex items-start justify-between">
                 <div>
-                  <h3 class="text-xl font-bold text-slate-800 flex items-center gap-1"><i class="fas fa-location-dot text-rose-400 text-sm"></i> {{ trip.destination }}</h3>
-                  <div class="flex items-center gap-1 text-xs text-slate-500 mt-1 bg-slate-100 inline-flex px-2 py-0.5 rounded-full">
+                  <h3 [class]="trip.visited ? 'text-xl font-bold text-slate-400 flex items-center gap-1' : 'text-xl font-bold text-slate-800 flex items-center gap-1'">
+                    <i [class]="trip.visited ? 'fas fa-location-dot text-emerald-400 text-sm' : 'fas fa-location-dot text-rose-400 text-sm'"></i>
+                    {{ trip.destination }}
+                  </h3>
+                  <div [class]="trip.visited
+                    ? 'flex items-center gap-1 text-xs text-slate-400 mt-1 bg-slate-100 inline-flex px-2 py-0.5 rounded-full'
+                    : 'flex items-center gap-1 text-xs text-slate-500 mt-1 bg-slate-100 inline-flex px-2 py-0.5 rounded-full'">
                     <i class="far fa-calendar-alt"></i> {{ trip.start_date | date:'MMM d' }} – {{ trip.end_date | date:'MMM d, y' }}
                   </div>
                 </div>
-                <div class="bg-gradient-to-br from-amber-50 to-rose-50 rounded-full p-2 shadow-inner">
-                  <i class="fas fa-passport text-rose-400 text-base"></i>
+                <div [class]="trip.visited ? 'bg-gradient-to-br from-emerald-50 to-teal-50 rounded-full p-2 shadow-inner' : 'bg-gradient-to-br from-amber-50 to-rose-50 rounded-full p-2 shadow-inner'">
+                  <i [class]="trip.visited ? 'fas fa-passport text-emerald-400 text-base' : 'fas fa-passport text-rose-400 text-base'"></i>
                 </div>
               </div>
-              
+
+              <!-- Budget row -->
               <div class="mt-4 flex items-center justify-between border-t border-pink-50 pt-3">
                 <div class="flex items-center gap-1 text-sm">
                   <span class="text-slate-500 text-xs font-semibold">💰 estimated</span>
                   <span class="text-lg font-bold text-emerald-600">RM{{ trip.total_budget }}</span>
                 </div>
+                <span [class]="trip.visited
+                  ? 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200'
+                  : 'text-[10px] font-bold px-2 py-0.5 rounded-full bg-violet-50 text-violet-500 border border-violet-200'">
+                  {{ trip.visited ? '✅ Visited' : '💭 Dreaming' }}
+                </span>
               </div>
 
+              <!-- Per-trip budget progress bar -->
               <div class="mt-3">
                 <div class="flex justify-between text-[11px] font-bold mb-1">
                   <span [ngClass]="isIndividualTripOverspent(trip) ? 'text-red-600' : 'text-slate-500'">
@@ -205,7 +249,6 @@
                     {{ isIndividualTripOverspent(trip) ? '⚠️ OVER LIMIT!' : getBudgetPercentage(trip) + '% used' }}
                   </span>
                 </div>
-                
                 <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden border border-slate-200/50">
                   <div class="h-full rounded-full transition-all duration-500"
                        [ngClass]="isIndividualTripOverspent(trip) ? 'bg-gradient-to-r from-red-500 to-rose-600' : (getBudgetPercentage(trip) >= 75 ? 'bg-gradient-to-r from-amber-400 to-orange-500' : 'bg-gradient-to-r from-emerald-400 to-teal-500')"
@@ -214,33 +257,41 @@
                 </div>
               </div>
 
+              <!-- Activities section -->
               <div class="mt-4 pt-3 border-t border-dashed border-slate-100 transition-colors duration-300 -mx-5 -mb-5 p-4 rounded-b-2xl"
                    [ngClass]="isIndividualTripOverspent(trip) ? 'bg-red-50/50' : 'bg-slate-50/50'">
-                
+
                 <div class="text-xs font-bold uppercase tracking-wide mb-2 flex items-center justify-between">
                   <span class="flex items-center gap-1 text-slate-500">
                     <i class="fas fa-map-signs text-rose-400"></i> Travel Tentative Schedule
                   </span>
-                  <span *ngIf="isIndividualTripOverspent(trip)" class="text-[9px] bg-red-600 text-white font-extrabold px-1.5 py-0.2 rounded shadow-sm">
-                    RM{{ getActualSpentForTrip(trip.id) - trip.total_budget }} OVER!
-                  </span>
+                  <div class="flex items-center gap-1">
+                    <span class="bg-rose-100 text-rose-500 rounded-full px-2 py-0.5 font-mono text-[10px]">
+                      {{ getActivitiesForTrip(trip.id).length }} stops
+                    </span>
+                    <span *ngIf="isIndividualTripOverspent(trip)" class="text-[9px] bg-red-600 text-white font-extrabold px-1.5 rounded shadow-sm">
+                      RM{{ getActualSpentForTrip(trip.id) - trip.total_budget }} OVER!
+                    </span>
+                  </div>
                 </div>
-                
+
+                <!-- Empty state -->
                 <p *ngIf="getActivitiesForTrip(trip.id).length === 0" class="text-[11px] text-slate-400 italic mb-3 pl-1">
                   Schedule is completely clear. Build your timeline below! 👇
                 </p>
 
+                <!-- Activity list -->
                 <div class="space-y-2 mb-4 max-h-56 overflow-y-auto pr-1">
-                  <div *ngFor="let act of getActivitiesForTrip(trip.id)" class="bg-white rounded-xl p-2.5 border border-slate-100 shadow-sm hover:border-pink-200 transition-all">
+                  <div *ngFor="let act of getActivitiesForTrip(trip.id)"
+                       class="bg-white rounded-xl p-2.5 border border-slate-100 shadow-sm hover:border-pink-200 transition-all group/item">
                     <div class="flex items-start justify-between gap-1">
                       <div>
                         <div class="flex items-center gap-1.5 flex-wrap">
-                          <span *ngIf="act.day_number" class="bg-amber-100 text-amber-800 text-[9px] px-1.5 py-0.2 rounded-md font-bold">
+                          <span *ngIf="act.day_number" class="bg-amber-100 text-amber-800 text-[9px] px-1.5 py-0.5 rounded-md font-bold">
                             DAY {{ act.day_number }}
                           </span>
                           <span class="text-xs font-bold text-slate-800">✨ {{ act.title }}</span>
                         </div>
-                        
                         <div class="flex items-center gap-3 text-[10px] text-slate-400 mt-1 font-medium">
                           <span *ngIf="act.time" class="flex items-center gap-0.5">
                             <i class="far fa-clock text-slate-400"></i> {{ act.time.substring(0, 5) }}
@@ -250,43 +301,45 @@
                           </span>
                         </div>
                       </div>
-
-                      <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg text-[10px] whitespace-nowrap">
-                        RM{{ act.cost || 0 }}
-                      </span>
+                      <div class="flex items-center gap-1 flex-shrink-0">
+                        <span class="font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-lg text-[10px] whitespace-nowrap">
+                          RM{{ act.cost || 0 }}
+                        </span>
+                        <button (click)="onDeleteActivity(act.id, trip.id)"
+                                class="opacity-0 group-hover/item:opacity-100 transition-opacity text-slate-300 hover:text-red-400">
+                          <i class="fas fa-xmark text-[10px]"></i>
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
 
+                <!-- Add activity form -->
                 <div class="bg-white/70 p-2.5 rounded-xl border border-slate-200/60 space-y-2">
                   <div class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Add New Schedule Event</div>
-                  
+
                   <div class="grid grid-cols-3 gap-1.5">
-                    <input type="number" placeholder="Day No." 
+                    <input type="number" placeholder="Day No."
                            [(ngModel)]="newActivityDays[trip.id]"
                            class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
-                    
-                    <input type="time" 
+                    <input type="time"
                            [(ngModel)]="newActivityTimes[trip.id]"
                            class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
-                    
-                    <input type="number" placeholder="Cost RM" 
+                    <input type="number" placeholder="Cost RM"
                            [(ngModel)]="newActivityCosts[trip.id]"
                            class="text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 text-center bg-white">
                   </div>
 
                   <div class="flex gap-1.5">
                     <div class="w-11/12 space-y-1.5">
-                      <input type="text" placeholder="Activity Title (e.g. Cafe Hunting)" 
+                      <input type="text" placeholder="Activity Title (e.g. Cafe Hunting)"
                              [(ngModel)]="newActivityTitles[trip.id]"
                              class="w-full text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 bg-white">
-                      
-                      <input type="text" placeholder="Location Name (e.g. Concubine Lane)" 
+                      <input type="text" placeholder="Location Name (e.g. Concubine Lane)"
                              [(ngModel)]="newActivityLocations[trip.id]"
                              class="w-full text-[11px] px-2 py-1.5 rounded-lg border border-slate-200 outline-none focus:border-pink-300 bg-white">
                     </div>
-
-                    <button (click)="onAddActivity(trip.id)" 
+                    <button (click)="onAddActivity(trip.id)"
                             class="w-1/12 bg-rose-400 hover:bg-rose-500 text-white rounded-lg transition-colors flex items-center justify-center self-stretch shadow-sm">
                       <i class="fas fa-plus text-sm"></i>
                     </button>
@@ -294,7 +347,6 @@
                 </div>
 
               </div>
-
             </div>
           </div>
         </div>

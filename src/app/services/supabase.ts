@@ -50,18 +50,71 @@ export class Supabase {
     }
   }
 
-  // Add these inside your existing Supabase service class if not present:
-  async getActivities() {
-    const { data, error } = await this.supabase.from('activities').select('*');
-    if (error) throw error;
+  // Update the visited status of a trip
+  async updateTripStatus(id: number, visited: boolean) {
+    const { error } = await this.supabase
+      .from('trips')
+      .update({ visited })
+      .eq('id', id);
+
+    if (error) {
+      console.error('❌ Supabase update status error:', error);
+      throw error;
+    }
+  }
+
+  // --- ACTIVITY DATA METHODS ---
+
+  // Fetch all activities for a specific trip (scoped by trip_id)
+  async getActivities(tripId: number) {
+    const { data, error } = await this.supabase
+      .from('activities')
+      .select('*')
+      .eq('trip_id', tripId)
+      .order('day_number', { ascending: true });
+
+    if (error) {
+      console.error('❌ Supabase fetch activities error:', error);
+      throw error;
+    }
     return data;
   }
 
-  async createActivity(activity: { trip_id: number; title: string; cost: number }) {
-    const { data, error } = await this.supabase.from('activities').insert([activity]);
-    if (error) throw error;
+  // Add a new activity for a trip (with full fields)
+  async createActivity(activityData: {
+    trip_id: number;
+    title: string;
+    day_number?: number | null;
+    time?: string | null;
+    cost?: number | null;
+    location_name?: string | null;
+  }) {
+    const { data, error } = await this.supabase
+      .from('activities')
+      .insert([activityData])
+      .select();
+
+    if (error) {
+      console.error('❌ Supabase create activity error:', error);
+      throw error;
+    }
     return data;
   }
+
+  // Delete an activity by id
+  async deleteActivity(id: number) {
+    const { error } = await this.supabase
+      .from('activities')
+      .delete()
+      .eq('id', id);
+
+    if (error) {
+      console.error('❌ Supabase delete activity error:', error);
+      throw error;
+    }
+  }
+
+  // --- SETTINGS DATA METHODS ---
 
   async getSettings() {
     const { data, error } = await this.supabase
